@@ -11,6 +11,8 @@ import { RegisterViewComponent } from './register-view/register-view.component';
 import { ShowListsComponent } from './show-lists/show-lists.component';
 import { TaskComponent } from './task/task.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http'; 
+
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

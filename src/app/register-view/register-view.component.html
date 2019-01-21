@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
-<form (submit)="register()">
+<form (submit)="registerNewUser()">
   <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" name="password" /> <input type="submit" value="Register" />
-  <div *ngIf="error">{{ error | json }}</div>
-  <div *ngIf="valid">Registered! <button routerLink="/board">Go to board</button></div>
+  <div *ngIf="error">Error en la creación del usuario.</div>
+  <div *ngIf="valid">Registered! <button routerLink="/board">Go to board</button></div>  
 </form>
+

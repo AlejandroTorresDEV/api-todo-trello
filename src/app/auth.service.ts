@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,private router:Router) { }
 
-  register(username: string, password: string) {
+  registerUser(username: string, password: string) {
     const body = { username, password };
     return this.http.post('https://apitrello.herokuapp.com/users', body).toPromise();
   }
