@@ -84,7 +84,6 @@ export class AuthService {
     });
   }
 
-
   logoutUser() {
     localStorage.removeItem("jwt");
     this.router.navigate(['/login']);
@@ -94,6 +93,12 @@ export class AuthService {
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
     const body = {task};
     return this.http.put('https://apitrello.herokuapp.com/tasks/'+idTask, body, options).toPromise();
+  }
+
+  deleteAllTask(idlist:number){
+    console.log(idlist);
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return this.http.delete('https://apitrello.herokuapp.com/list/tasks/'+idlist, options).toPromise();
   }
 
 }

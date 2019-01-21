@@ -58,24 +58,15 @@ export class DataManagerService {
     });
   }
 
-  addNewTask(text: string, list: List) {
-    this.authService.newTask(text,list.listId).then(res => {
-      console.log(res);
+  deleteList(listId: number) {
+    this.authService.deleteList(listId).then(res => {
       this.loadDataFromBackend();
     });
   }
-  deleteTask(task: Task) {
-    this.data.lists = this.data.lists.map(listObj => {
-      if (listObj.listId === task.listId) {
-        listObj.tasks = listObj.tasks.filter(taskObj => taskObj.taskId !== task.taskId);
-      }
-      return listObj;
-    });
-  }
 
-  deleteList(listId: number) {
-    // this.data.lists = this.data.lists.filter(list => list.listId !== listId);
-    this.authService.deleteList(listId).then(res => {
+  deleteTask(listId: number) {
+    this.authService.deleteAllTask(listId).then(res => {
+      console.log("Respuesta"+res);
       this.loadDataFromBackend();
     });
   }
@@ -83,9 +74,19 @@ export class DataManagerService {
   editListName(list: List) {
     this.data.lists = this.data.lists.map(listObj => (listObj.listId === list.listId ? list : listObj));
   }
+
+  addNewTask(text: string, list: List) {
+    this.authService.newTask(text,list.listId).then(res => {
+      this.loadDataFromBackend();
+    }).catch(error =>{
+      
+    });
+  }
+
   editTask(newTask: Task) {
     this.authService.editTask(newTask.taskId,newTask.text).then(res => {
       this.loadDataFromBackend();
     });
   }
+
 }

@@ -27,6 +27,7 @@ export class ListComponent {
   delete() {
     if (confirm('Do you really want to delete the list ' + this.list.name)) {
       this.dataService.deleteList(this.list.listId);
+      this.dataService.deleteTask(this.list.listId);
     }
   }
 
