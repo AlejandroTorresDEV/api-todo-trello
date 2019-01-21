@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Task, List } from './models.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +56,12 @@ export class AuthService {
   getLists(): any {
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
     return this.http.get('https://apitrello.herokuapp.com/list', options).toPromise();
+  }
+
+  newTask(task: string, idlist: number): any{
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    const body = { idlist,task };
+    return this.http.post('https://apitrello.herokuapp.com/tasks/', body, options).toPromise();
   }
 
   getTasks(idlist: number): any {

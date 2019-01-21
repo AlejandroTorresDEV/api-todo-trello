@@ -59,21 +59,9 @@ export class DataManagerService {
   }
 
   addNewTask(text: string, list: List) {
-    const now = new Date();
-    const newTask: Task = {
-      listId: list.listId,
-      taskId: Date.now(),
-      text,
-      completed: false,
-      color: 'white',
-      createdAt: now,
-      modifiedAt: now,
-    };
-    this.data.lists = this.data.lists.map(listObj => {
-      if (listObj.listId === list.listId) {
-        listObj.tasks.push(newTask);
-      }
-      return listObj;
+    this.authService.newTask(text,list.listId).then(res => {
+      console.log(res);
+      this.loadDataFromBackend();
     });
   }
   deleteTask(task: Task) {
