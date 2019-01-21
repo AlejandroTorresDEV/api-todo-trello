@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { DataManagerService } from '../data-manager.service';
+
 
 @Component({
   selector: 'app-add-new-list',
@@ -7,8 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddNewListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService: DataManagerService,private authService: AuthService) {}
 
+  
   ngOnInit() {
   }
 

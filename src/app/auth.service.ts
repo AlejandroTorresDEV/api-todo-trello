@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private http: HttpClient,private router:Router) { }
 
-  loginUser(username, password){
+  loginUser(username, password) : any{
     const body = { username, password };
 
     return new Promise((resolve, reject) => {
@@ -32,6 +32,31 @@ export class AuthService {
           } else {
             reject('Try again');
           }
+        });
+    });
+  }
+
+  getLists(): any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return this.http.get('https://apitrello.herokuapp.com/list', options).toPromise();
+  }
+
+  getTasks(idlist: number): any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return new Promise((resolve, reject) => {
+      this.http
+        .get('https://apitrello.herokuapp.com/list/tasks/' + idlist, options)
+        .toPromise()
+        .then(tasks => {
+          if (tasks) {
+            resolve(tasks);
+          } else {
+            resolve([]);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          resolve([]);
         });
     });
   }
