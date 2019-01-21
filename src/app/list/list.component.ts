@@ -32,7 +32,9 @@ export class ListComponent {
   }
 
   editName() {
-    this.list.name = this.newName;
+    const text = this.newName;
+    let capitaliceText = text.charAt(0).toUpperCase() + text.slice(1);
+    this.list.name = capitaliceText;
     this.dataService.editListName(this.list);
     this.editing = false;
   }

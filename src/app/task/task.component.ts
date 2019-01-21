@@ -14,7 +14,7 @@ export class TaskComponent {
   constructor(private dataService: DataManagerService) {}
 
   deleteTask() {
-    this.dataService.deleteTask(this.task);
+    //this.dataService.deleteTask(this.task.listId);
   }
 
   editStart() {
@@ -22,7 +22,9 @@ export class TaskComponent {
   }
 
   editTaskText() {
-    this.task.text = this.newTaskText;
+    const text = this.newTaskText;
+    let capitaliceText = text.charAt(0).toUpperCase() + text.slice(1);
+    this.task.text = capitaliceText;
     this.dataService.editTask(this.task);
     this.editing = false;
   }
