@@ -10,6 +10,7 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { ShowListsComponent } from './show-lists/show-lists.component';
 import { TaskComponent } from './task/task.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { TaskComponent } from './task/task.component';
     LoginViewComponent,
     RegisterViewComponent,
     ShowListsComponent,
-    TaskComponent
+    TaskComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
