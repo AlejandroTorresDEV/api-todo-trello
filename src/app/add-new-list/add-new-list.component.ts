@@ -25,7 +25,7 @@ export class AddNewListComponent implements OnInit {
 
   logoutUser(){
     console.log("hola");
-   // this.apiService.logoutUser();
+    this.authService.logoutUser();
   }
 
 }

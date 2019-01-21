@@ -1,8 +1,7 @@
 .showLists {
-    background: linear-gradient(to bottom, #0d47a1  , #aaa);
-    min-height: calc(100vh - 100px);
+    display: flex;
     padding: 2em;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 
