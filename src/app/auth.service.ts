@@ -36,6 +36,22 @@ export class AuthService {
     });
   }
 
+  registerUser(username: string, password: string) {
+    const body = { username, password };
+    return this.http.post('https://apitrello.herokuapp.com/users', body).toPromise();
+  }
+
+  newList(name: string): any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    const body = { name };
+    return this.http.post('https://apitrello.herokuapp.com/list/', body, options).toPromise();
+  }
+
+  deleteList(id: number): any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return this.http.delete('https://apitrello.herokuapp.com/list/' + id, options).toPromise();
+  }
+
   getLists(): any {
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
     return this.http.get('https://apitrello.herokuapp.com/list', options).toPromise();
@@ -61,9 +77,11 @@ export class AuthService {
     });
   }
 
-  registerUser(username: string, password: string) {
-    const body = { username, password };
-    return this.http.post('https://apitrello.herokuapp.com/users', body).toPromise();
+
+  logoutUser() {
+    localStorage.removeItem("jwt");
+    this.router.navigate(['/login']);
   }
+  
 
 }

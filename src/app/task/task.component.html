@@ -1,3 +1,10 @@
-<p>
-  task works!
-</p>
+<div class="task">
+    <h4>
+      <span *ngIf="!editing" (dblclick)="editStart()">{{ task.text }}</span>
+      <input autofocus *ngIf="editing" type="text" [(ngModel)]="newTaskText" (keyup.enter)="editTaskText()" (blur)="cancelEdit()" />
+    </h4>
+    <div class="controls">
+      <i class="material-icons" (click)="deleteTask()">delete</i> <i (click)="editStart()" class="material-icons">edit</i>
+    </div>
+  </div>
+  

@@ -16,4 +16,16 @@ export class AddNewListComponent implements OnInit {
   ngOnInit() {
   }
 
+  addList(ev) {
+    if (ev.target.value.trim() !== '') {
+      this.dataService.addNewList(ev.target.value.trim());
+      ev.target.value = '';
+    }
+  }
+
+  logoutUser(){
+    console.log("hola");
+   // this.apiService.logoutUser();
+  }
+
 }

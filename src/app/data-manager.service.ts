@@ -50,4 +50,63 @@ export class DataManagerService {
     this.loadDataFromBackend();
     return this.data;
   }
+
+  addNewList(name: string) {
+    this.authService.newList(name).then(res => {
+      console.log(res);
+      this.loadDataFromBackend();
+    });
+  }
+
+  addNewTask(text: string, list: List) {
+    const now = new Date();
+    const newTask: Task = {
+      listId: list.listId,
+      taskId: Date.now(),
+      text,
+      completed: false,
+      color: 'white',
+      createdAt: now,
+      modifiedAt: now,
+    };
+    this.data.lists = this.data.lists.map(listObj => {
+      if (listObj.listId === list.listId) {
+        listObj.tasks.push(newTask);
+      }
+      return listObj;
+    });
+  }
+  deleteTask(task: Task) {
+    this.data.lists = this.data.lists.map(listObj => {
+      if (listObj.listId === task.listId) {
+        listObj.tasks = listObj.tasks.filter(taskObj => taskObj.taskId !== task.taskId);
+      }
+      return listObj;
+    });
+  }
+
+  deleteList(listId: number) {
+    // this.data.lists = this.data.lists.filter(list => list.listId !== listId);
+    this.authService.deleteList(listId).then(res => {
+      this.loadDataFromBackend();
+    });
+  }
+
+  editListName(list: List) {
+    this.data.lists = this.data.lists.map(listObj => (listObj.listId === list.listId ? list : listObj));
+  }
+  editTask(newTask: Task) {
+    this.data.lists = this.data.lists.map(list => {
+      if (list.listId === newTask.listId) {
+        list.tasks = list.tasks.map(task => {
+          if (task.taskId === newTask.taskId) {
+            return newTask;
+          }
+          return task;
+        });
+      }
+
+      return list;
+    });
+  }
 }
