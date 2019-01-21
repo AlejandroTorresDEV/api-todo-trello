@@ -1,11 +1,15 @@
 
 header {
   height: 100px;
-  background: linear-gradient(to left, #444, #000);
+  background: #0d47a1;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100vw;
+}
+
+.btnLogOut{
+  justify-content: flex-end;
 }
 
 input {

@@ -15,11 +15,6 @@ export class ListComponent {
 
   constructor(private dataService: DataManagerService) {}
 
-  delete() {
-    if (confirm('Do you really want to delete the list ' + this.list.name)) {
-      this.dataService.deleteList(this.list.listId);
-    }
-  }
   newTask(ev) {
     const text = ev.target.value.trim();
 
@@ -28,11 +23,19 @@ export class ListComponent {
       ev.target.value = '';
     }
   }
+
+  delete() {
+    if (confirm('Do you really want to delete the list ' + this.list.name)) {
+      this.dataService.deleteList(this.list.listId);
+    }
+  }
+
   editName() {
     this.list.name = this.newName;
     this.dataService.editListName(this.list);
     this.editing = false;
   }
+  
   edit(node) {
     setTimeout(() => {
       node.focus();
