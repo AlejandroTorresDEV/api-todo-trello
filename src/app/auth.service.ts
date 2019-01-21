@@ -53,9 +53,15 @@ export class AuthService {
     return this.http.delete('https://apitrello.herokuapp.com/list/' + id, options).toPromise();
   }
 
-  getLists(): any {
+  getLists() {
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
     return this.http.get('https://apitrello.herokuapp.com/list', options).toPromise();
+  }
+
+  editList(listId: number,name: string): any{
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    const body = {name};
+    return this.http.put('https://apitrello.herokuapp.com/list/'+listId, body, options).toPromise();
   }
 
   newTask(task: string, idlist: number): any{
@@ -95,7 +101,7 @@ export class AuthService {
     return this.http.put('https://apitrello.herokuapp.com/tasks/'+idTask, body, options).toPromise();
   }
 
-  deleteAllTask(idlist:number){
+  deleteAllTask(idlist:number):any{
     console.log(idlist);
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
     return this.http.delete('https://apitrello.herokuapp.com/list/tasks/'+idlist, options).toPromise();

@@ -66,21 +66,23 @@ export class DataManagerService {
 
   deleteTask(listId: number) {
     this.authService.deleteAllTask(listId).then(res => {
-      console.log("Respuesta"+res);
       this.loadDataFromBackend();
+    }).catch(maybeNotAndError =>{
+      if (maybeNotAndError.status === 200) {
+      }
     });
   }
 
   editListName(list: List) {
-    this.data.lists = this.data.lists.map(listObj => (listObj.listId === list.listId ? list : listObj));
+    this.authService.editList(list.listId,list.name).then(res => {
+      this.loadDataFromBackend();
+    });  
   }
 
   addNewTask(text: string, list: List) {
     this.authService.newTask(text,list.listId).then(res => {
       this.loadDataFromBackend();
-    }).catch(error =>{
-      
-    });
+    })
   }
 
   editTask(newTask: Task) {
