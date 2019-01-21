@@ -90,5 +90,10 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
   
+  editTask(idTask : number,task : string) : any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    const body = {task};
+    return this.http.put('https://apitrello.herokuapp.com/tasks/'+idTask, body, options).toPromise();
+  }
 
 }
