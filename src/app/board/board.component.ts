@@ -9,7 +9,7 @@ import { DataManagerService } from '../data-manager.service';
 })
 export class BoardComponent implements OnInit {
   data: Data;
-
+  loanding: boolean;
   constructor(private dataManager: DataManagerService) {}
 
   ngOnInit() {

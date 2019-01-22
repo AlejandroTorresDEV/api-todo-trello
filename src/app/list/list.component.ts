@@ -45,6 +45,7 @@ export class ListComponent {
     }, 0);
     this.editing = true;
   }
+  
   cancelEdit() {
     this.editing = false;
   }

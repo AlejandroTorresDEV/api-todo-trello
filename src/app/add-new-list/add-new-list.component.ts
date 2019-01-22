@@ -12,20 +12,19 @@ export class AddNewListComponent implements OnInit {
 
   constructor(private dataService: DataManagerService,private authService: AuthService) {}
 
-  
   ngOnInit() {
   }
 
   addList(ev) {
     if (ev.target.value.trim() !== '') {
-      this.dataService.addNewList(ev.target.value.trim());
+      let text = ev.target.value.trim();
+      let capitaliceText = text.charAt(0).toUpperCase() + text.slice(1);
+      this.dataService.addNewList(capitaliceText);
       ev.target.value = '';
     }
   }
 
   logoutUser(){
-    console.log("hola");
     this.authService.logoutUser();
   }
-
 }

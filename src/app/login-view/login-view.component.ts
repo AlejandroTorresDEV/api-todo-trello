@@ -11,26 +11,34 @@ export class LoginViewComponent implements OnInit {
   username: string;
   password: string;
   errorLogin : boolean;
+  errorForm : boolean;
+  loanding: boolean;
   error: any;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    this.loanding = false;
   }
 
   loginUser(){  
     const { username, password } = this;
-    if (username !== undefined && password !== undefined) {
+    this.loanding = true;
+    if (username !== undefined && password !== undefined 
+      || username !== null  && password !== null) {
       this.authService
-        .loginUser(username.trim(), password.trim())
+        .loginUser(username, password)
         .then(() => {
           this.error = undefined;
           this.router.navigate(['/board']);
         })
         .catch(error => {
-           this.errorLogin = true;
+          this.loanding = false;
+          this.errorLogin = true;
           this.error = error;
         });
+    }else{
+      this.errorForm = true;
     }
   }
 

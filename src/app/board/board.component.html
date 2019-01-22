@@ -1,4 +1,6 @@
+
 <section>
     <app-add-new-list></app-add-new-list>
+    <img *ngIf="loanding" class="spinnerImg" src="assets/spinnerLoanding.gif"  />
     <app-show-lists [lists]="data.lists"></app-show-lists>
-  </section>
+</section>

@@ -1,11 +1,18 @@
 <app-navbar></app-navbar>
 
-<form (submit)="loginUser()">
+<div *ngIf="loanding" class="spinnerImg">
+    <img src="assets/spinnerLoanding.gif"  />
+</div>
+
+<form *ngIf="!loanding" (submit)="loginUser()">
   <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" name="password" /> 
   <input type="submit" value="Login" />
   <div *ngIf="errorLogin" class="alert alert-danger" role="alert">
       El usuario o la contraseña es erronea
+  </div>
+  <div *ngIf="errorForm" class="alert alert-danger" role="alert">
+      Debes de rellenar todos los campos
   </div>
 </form>
 

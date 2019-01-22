@@ -11,28 +11,29 @@ export class RegisterViewComponent implements OnInit{
   password: string;
   validForm : boolean = true;
   userCreated : boolean = false;
+  loanding: boolean;
   error: any;
   valid: any;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    
   }
 
   registerNewUser(){
-    console.log("hola");
     const { username, password } = this;
+    this.loanding = true;
     if (username !== undefined && password !== undefined) {
       this.authService
         .registerUser(username.trim(), password.trim())
         .then(res => {
-          console.log("quisme");
+          this.loanding = false;
           this.validForm = true;
           this.userCreated = true;
           this.valid = res;
         })
         .catch(error => {
+          this.loanding = false;
           this.error = error;
         });
     }else{

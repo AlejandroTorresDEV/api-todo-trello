@@ -1,15 +1,17 @@
 <app-navbar></app-navbar>
 
-<form (submit)="registerNewUser()">
+<div *ngIf="loanding" class="spinnerImg">
+  <img src="assets/spinnerLoanding.gif" />
+</div>
+
+<form *ngIf="!loanding" (submit)="registerNewUser()">
   <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
   <input type="password" placeholder="Password" [(ngModel)]="password" name="password" /> <input type="submit" value="Register" />
   <div *ngIf="!validForm" class="alert alert-danger" role="alert">
-      Debes de rellenar todos los campos
+    Debes de rellenar todos los campos
   </div>
   <div *ngIf="userCreated" class="alert alert-success" role="alert">
-      Usuario creado correctamente
-      <button  routerLink="/login" type="button" class="btn btn-success">Go to Login</button>
+    Usuario creado correctamente
+    <button routerLink="/login" type="button" class="btn btn-success">Go to Login</button>
   </div>
 </form>
-
-

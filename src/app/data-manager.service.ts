@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { List, Task } from './models.interface';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,13 @@ export class DataManagerService {
     lists: [],
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  jwt: string = localStorage.getItem('jwt');
+
+
+  constructor(private authService: AuthService, private router: Router,private http: HttpClient) {}
 
   loadDataFromBackend() {
-    this.authService
+    this
       .getLists()
       .then((rawLists: Array<any>) => {
         console.log(rawLists);
@@ -27,7 +31,7 @@ export class DataManagerService {
         }));
         Promise.all(
           lists.map(async (list: List) => {
-            list.tasks = await this.authService.getTasks(list.listId);
+            list.tasks = await this.getTasks(list.listId);
             list.tasks = list.tasks.map((rawTask: any) => ({
               listId: rawTask.idlist,
               taskId: rawTask.id,
@@ -44,6 +48,31 @@ export class DataManagerService {
         });
       })
       .catch(() => this.router.navigate(['/login']));
+  }
+
+  getLists() {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return this.http.get('https://apitrello.herokuapp.com/list', options).toPromise();
+  }
+
+  getTasks(idlist: number): any {
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    return new Promise((resolve, reject) => {
+      this.http
+        .get('https://apitrello.herokuapp.com/list/tasks/' + idlist, options)
+        .toPromise()
+        .then(tasks => {
+          if (tasks) {
+            resolve(tasks);
+          } else {
+            resolve([]);
+          }
+        })
+        .catch(error => {
+          console.log(error);
+          resolve([]);
+        });
+    });
   }
 
   getDataUser(){
