@@ -13,7 +13,10 @@ export class BoardComponent implements OnInit {
   constructor(private dataManager: DataManagerService) {}
 
   ngOnInit() {
-    this.data = this.dataManager.getDataUser();
+      this.data = this.dataManager.getDataUser();
+  }
+
+  reload(){
   }
 
 }

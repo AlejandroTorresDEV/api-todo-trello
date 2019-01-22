@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { DataManagerService } from '../data-manager.service';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +19,7 @@ export class LoginViewComponent implements OnInit {
 
   
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router,private dataManagerService: DataManagerService) {
   }
 
   ngOnInit() {

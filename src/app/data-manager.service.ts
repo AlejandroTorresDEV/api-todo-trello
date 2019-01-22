@@ -14,10 +14,10 @@ export class DataManagerService {
 
   jwt: string = localStorage.getItem('jwt');
 
-
   constructor(private authService: AuthService, private router: Router,private http: HttpClient) {}
 
   loadDataFromBackend() {
+    console.log(this.jwt);
     this
       .getLists()
       .then((rawLists: Array<any>) => {
