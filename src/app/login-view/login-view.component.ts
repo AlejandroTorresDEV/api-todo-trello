@@ -24,20 +24,29 @@ export class LoginViewComponent implements OnInit {
   loginUser(){  
     const { username, password } = this;
     this.loanding = true;
-    if (username !== undefined && password !== undefined 
-      || username !== null  && password !== null) {
-      this.authService
+    if (username !== undefined && password !== undefined) {
+      if(username.trim() !== '' && password.trim() !== '' ){
+        this.authService
         .loginUser(username, password)
         .then(() => {
+          this.loanding = false;
           this.error = undefined;
           this.router.navigate(['/board']);
         })
         .catch(error => {
           this.loanding = false;
+          this.errorForm = false;
           this.errorLogin = true;
           this.error = error;
         });
+      }else{
+        this.loanding = false;
+        this.errorLogin = false;
+        this.errorForm = true;
+      } 
     }else{
+      this.loanding = false;
+      this.errorLogin = false;
       this.errorForm = true;
     }
   }

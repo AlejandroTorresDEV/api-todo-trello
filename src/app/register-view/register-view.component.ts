@@ -24,8 +24,9 @@ export class RegisterViewComponent implements OnInit{
     const { username, password } = this;
     this.loanding = true;
     if (username !== undefined && password !== undefined) {
-      this.authService
-        .registerUser(username.trim(), password.trim())
+      if(username.trim() !== '' && password.trim() !== '' ){
+        this.authService
+        .registerUser(username, password)
         .then(res => {
           this.loanding = false;
           this.validForm = true;
@@ -36,7 +37,12 @@ export class RegisterViewComponent implements OnInit{
           this.loanding = false;
           this.error = error;
         });
+      }else{
+        this.loanding = false;
+        this.validForm = false;
+      } 
     }else{
+      this.loanding = false;
       this.validForm = false;
     }
   }
