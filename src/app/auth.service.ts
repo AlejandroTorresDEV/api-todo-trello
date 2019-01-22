@@ -27,6 +27,7 @@ export class AuthService {
             const jwt = maybeNotAndError.error.text;
             this.jwt = jwt;
             localStorage.setItem('jwt', jwt);
+            localStorage.setItem('isLogged', "true");
             resolve(200);
           } else if (maybeNotAndError.status === 401) {
             reject('Wrong password');
@@ -42,11 +43,6 @@ export class AuthService {
     return this.http.post('https://apitrello.herokuapp.com/users', body).toPromise();
   }
 
-  newList(name: string): any {
-    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
-    const body = { name };
-    return this.http.post('https://apitrello.herokuapp.com/list/', body, options).toPromise();
-  }
 
   deleteList(id: number): any {
     const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
@@ -107,4 +103,12 @@ export class AuthService {
     return this.http.delete('https://apitrello.herokuapp.com/list/tasks/'+idlist, options).toPromise();
   }
 
+  getToken(): boolean {
+    let jwt = localStorage.getItem("jwt");
+    if (jwt!==null) {
+        return true;
+    }else{
+      return false;
+    }
+  }
 }

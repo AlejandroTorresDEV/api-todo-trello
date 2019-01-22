@@ -80,14 +80,20 @@ export class DataManagerService {
     return this.data;
   }
 
-  addNewList(name: string) {
-    this.authService.newList(name).then(res => {
-      console.log(res);
-      this.loadDataFromBackend();
+  addNewList(name: string) :any{
+    const options = { headers: { Authorization: `Bearer ${this.jwt}` } };
+    const body = { name };
+    return new Promise((resolve, reject) => {
+      this.http.post('https://apitrello.herokuapp.com/list/', body, options)
+      .toPromise()
+      .then(res => {
+        console.log(res);
+        this.loadDataFromBackend();
+      })
     });
   }
 
-  deleteList(listId: number) {
+  deleteList(listId: number) :any {
     this.authService.deleteList(listId).then(res => {
       this.loadDataFromBackend();
     });
@@ -97,8 +103,7 @@ export class DataManagerService {
     this.authService.deleteAllTask(listId).then(res => {
       this.loadDataFromBackend();
     }).catch(maybeNotAndError =>{
-      if (maybeNotAndError.status === 200) {
-      }
+      if (maybeNotAndError.status === 200) {}
     });
   }
 

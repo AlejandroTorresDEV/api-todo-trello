@@ -15,11 +15,13 @@ export class LoginViewComponent implements OnInit {
   loanding: boolean;
   error: any;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  
+
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
-    this.loanding = false;
-  }
+   }
 
   loginUser(){  
     const { username, password } = this;
